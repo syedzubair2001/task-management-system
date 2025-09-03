@@ -1,12 +1,23 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime
+# uvicorn app.main:app 
 
 # ---------- User Schemas ----------
 class UserCreate(BaseModel):
     username: str
     email: EmailStr
     password: str
+# in schemas.py
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+# ---------- Auth ----------
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
 
 class UserOut(BaseModel):
     id: int
@@ -41,3 +52,7 @@ class TaskOut(TaskBase):
 
     class Config:
         from_attributes = True
+
+# ---------- Task Update Status Schema ----------
+class TaskUpdateStatus(BaseModel):
+    new_status: str

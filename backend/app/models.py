@@ -11,7 +11,7 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
     created_at = Column(DateTime, server_default=func.now())
-
+    current_token = Column(String, nullable=True)  # <-- new column
     tasks = relationship("Task", back_populates="owner")
 
 

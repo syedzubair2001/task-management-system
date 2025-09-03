@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from .database import engine, Base
-from .routes import tasks
+from .routes import tasks, auth  # Include auth router
 from fastapi.middleware.cors import CORSMiddleware
 
 # Create DB tables
@@ -18,7 +18,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include task routes
+# Include routers
+app.include_router(auth.router)   # <-- include auth endpoints
 app.include_router(tasks.router)
 
 # Root endpoint
